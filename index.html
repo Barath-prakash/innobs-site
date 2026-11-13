@@ -3,42 +3,472 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Innobs Technology</title>
+<title>Innobs Technology | Software products and custom apps</title>
+<meta name="description" content="Innobs Technology builds software products and custom web and mobile apps. Our flagship product is Scholae, a school management platform." />
+<meta property="og:title" content="Innobs Technology" />
+<meta property="og:description" content="Software products and custom apps. Home of Scholae, the school management platform." />
+<meta property="og:url" content="https://innobs.com/" />
+<meta name="theme-color" content="#1e2a78" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b4bdb'/%3E%3Cpath d='M22 16h20v6h-7v20h7v6H22v-6h7V22h-7z' fill='%23fff'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #0f1116;
-    color: #f2f2f5;
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
+  :root {
+    --ink: #0f1430;
+    --ink-2: #454b6b;
+    --ink-3: #6b7090;
+    --line: #e4e6f0;
+    --bg: #ffffff;
+    --bg-soft: #f5f6fb;
+    --brand: #3b4bdb;
+    --brand-dark: #1e2a78;
+    --brand-soft: #eceefe;
+    --accent: #14b8a6;
+    --accent-soft: #e0f7f4;
+    --scholae: #7b1fa2;
+    --scholae-soft: #f3e5f5;
+    --radius: 18px;
+    --shadow: 0 1px 2px rgba(15, 20, 48, .04), 0 12px 32px -12px rgba(15, 20, 48, .16);
+    --max: 1180px;
+    color-scheme: light;
   }
-  .wrap { max-width: 560px; }
-  h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-  p { color: #b3b6c2; line-height: 1.6; }
-  a {
-    display: inline-block;
-    margin-top: 24px;
-    color: #7c9cff;
-    text-decoration: none;
-    border: 1px solid #7c9cff;
-    padding: 10px 20px;
-    border-radius: 8px;
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { margin: 0; font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -.02em; }
+  p { margin: 0; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+  .eyebrow::before { content: ""; width: 18px; height: 2px; background: currentColor; border-radius: 2px; }
+  .head { max-width: 680px; margin-bottom: 48px; }
+  .head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .head.center .eyebrow::before { display: none; }
+  .head h2, .split h2 { font-size: clamp(28px, 4vw, 42px); margin: 12px 0 14px; }
+  .head p, .sub { color: var(--ink-2); font-size: 17px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 700; font-size: 15px; border: 1.5px solid transparent; cursor: pointer; transition: transform .15s, background .15s, color .15s, border-color .15s; white-space: nowrap; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 8px 20px -8px rgba(59, 75, 219, .6); }
+  .btn-primary:hover { background: #2f3ec4; }
+  .btn-ghost { background: #fff; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+  .btn-light { background: #fff; color: var(--brand-dark); }
+  .btn-outline-light { color: #fff; border-color: rgba(255,255,255,.45); }
+  .btn-outline-light:hover { background: rgba(255,255,255,.1); }
+  .btn-scholae { background: var(--scholae); color: #fff; box-shadow: 0 8px 20px -8px rgba(123, 31, 162, .7); }
+  .btn-scholae:hover { background: #4a148c; }
+
+  .topbar { background: var(--brand-dark); color: #c9cdf5; font-size: 13px; }
+  .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 8px; padding-bottom: 8px; }
+  .tb-group { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .tb-group svg { width: 14px; height: 14px; color: #5eead4; }
+  .topbar a { color: #fff; font-weight: 600; }
+  .topbar a:hover { text-decoration: underline; }
+  header.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.9); backdrop-filter: saturate(160%) blur(12px); -webkit-backdrop-filter: saturate(160%) blur(12px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+  header.nav.scrolled { border-bottom-color: var(--line); }
+  header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--accent)); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; }
+  .logo small { display: block; font-size: 11px; font-weight: 600; color: var(--ink-3); letter-spacing: .04em; margin-top: -2px; }
+  nav.links { display: flex; gap: 4px; }
+  nav.links a { padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 15px; color: var(--ink-2); white-space: nowrap; }
+  nav.links a:hover { color: var(--brand); background: var(--brand-soft); }
+  .nav-cta { display: flex; gap: 10px; align-items: center; }
+  .menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; width: 42px; height: 42px; cursor: pointer; padding: 0; }
+  .menu-btn span { display: block; width: 18px; height: 2px; background: var(--ink); margin: 4px auto; border-radius: 2px; }
+
+  /* Hero */
+  .hero { padding: 80px 0 110px; background: radial-gradient(900px 480px at 85% 10%, rgba(20,184,166,.12), transparent 60%), radial-gradient(800px 520px at 10% 0%, rgba(59,75,219,.12), transparent 60%), var(--bg); }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--ink-2); box-shadow: var(--shadow); }
+  .pill b { background: var(--scholae-soft); color: var(--scholae); padding: 3px 10px; border-radius: 999px; font-size: 12px; }
+  .hero h1 { font-size: clamp(36px, 5.4vw, 60px); font-weight: 800; margin: 22px 0 20px; }
+  .grad { background: linear-gradient(90deg, var(--brand), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lead { font-size: 18px; color: var(--ink-2); max-width: 540px; }
+  .ctas { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .shot { border-radius: 18px; box-shadow: 0 30px 60px -20px rgba(15,20,48,.35); width: 100%; height: auto; }
+  .hero-card { position: relative; display: block; }
+  .hero-tag { position: absolute; left: -14px; bottom: -22px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px 16px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; }
+  .hero-tag span { width: 40px; height: 40px; border-radius: 12px; background: var(--scholae-soft); color: var(--scholae); display: grid; place-items: center; font-weight: 800; }
+  .hero-tag b { display: block; font-size: 15px; }
+  .hero-tag small { color: var(--ink-3); font-weight: 600; font-size: 12px; }
+
+  /* Strip */
+  .strip { padding: 0; margin-top: -44px; position: relative; z-index: 2; }
+  .strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .strip-grid > div { padding: 26px 24px; border-right: 1px solid var(--line); }
+  .strip-grid > div:last-child { border-right: 0; }
+  .strip-grid b { display: block; font-size: 24px; font-weight: 800; color: var(--brand-dark); letter-spacing: -.02em; }
+  .strip-grid span { color: var(--ink-3); font-size: 14px; font-weight: 600; }
+
+  /* Cards */
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #d3d7ef; }
+  .card h3 { font-size: 20px; margin: 14px 0 8px; }
+  .card p { color: var(--ink-2); font-size: 15px; }
+  .more { display: inline-flex; gap: 6px; align-items: center; margin-top: 16px; font-weight: 700; font-size: 14px; color: var(--brand); }
+  .more svg { width: 16px; height: 16px; }
+  .icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); }
+  .icon svg { width: 24px; height: 24px; }
+  .icon.t { background: var(--accent-soft); color: #0f766e; }
+  .icon.w { background: #fef3c7; color: #b45309; }
+  .icon.p { background: #fce7f3; color: #be185d; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .soft { background: var(--bg-soft); }
+
+  /* About */
+  .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
+  .checks { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+  .checks li { display: flex; gap: 10px; color: var(--ink-2); }
+  .checks svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; margin-top: 3px; }
+
+  /* Products */
+  .products-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; }
+  .product-feature { position: relative; overflow: hidden; border-radius: 24px; padding: 40px; color: #fff; background: radial-gradient(600px 300px at 100% 0%, rgba(20,184,166,.3), transparent 60%), linear-gradient(140deg, #8e24aa 0%, #4a148c 100%); display: flex; flex-direction: column; gap: 18px; }
+  .badge { align-self: flex-start; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.25); padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+  .product-feature h3 { font-size: 34px; }
+  .product-feature h3 small { display: block; font-size: 15px; font-weight: 600; color: #e1bee7; letter-spacing: 0; margin-top: 8px; }
+  .product-feature p { color: #f3e5f5; max-width: 520px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.14); }
+  .product-feature .shot { margin-top: 6px; border-radius: 14px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.45); }
+  .product-feature .ctas { margin-top: 6px; }
+  .product-side { display: grid; gap: 24px; align-content: start; }
+  .card.dashed { border-style: dashed; background: var(--bg-soft); }
+  .icon.s { background: var(--scholae-soft); color: var(--scholae); }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+  .step { padding: 28px 24px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); }
+  .step::before { counter-increment: step; content: "0" counter(step); font-size: 14px; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 4px 10px; border-radius: 8px; }
+  .step h3 { font-size: 18px; margin: 16px 0 8px; }
+  .step p { color: var(--ink-2); font-size: 15px; }
+
+  /* CTA */
+  .cta { border-radius: 28px; padding: 56px; color: #fff; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; background: radial-gradient(500px 260px at 100% 100%, rgba(20,184,166,.4), transparent 60%), linear-gradient(135deg, var(--brand-dark), var(--brand)); }
+  .cta h2 { font-size: clamp(28px, 3.6vw, 40px); }
+  .cta p { color: #dfe2fb; margin-top: 14px; font-size: 17px; }
+  .contact-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: 26px; display: grid; gap: 18px; }
+  .contact-card .row { display: flex; gap: 14px; align-items: center; }
+  .contact-card .ic { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.14); display: grid; place-items: center; flex-shrink: 0; }
+  .contact-card svg { width: 20px; height: 20px; }
+  .contact-card small { display: block; color: #c9cdf5; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .contact-card b { display: block; font-size: 16px; word-break: break-word; }
+  .contact-card b a:hover { text-decoration: underline; }
+
+  footer { background: var(--ink); color: #a9adc6; padding: 64px 0 28px; }
+  .foot { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; }
+  footer .logo { color: #fff; }
+  footer .logo small { color: #8a8fb0; }
+  footer p { margin-top: 16px; font-size: 14px; max-width: 320px; }
+  footer h4 { color: #fff; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 16px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; }
+  footer ul a:hover, .foot-bottom a:hover { color: #fff; }
+  .foot-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 1080px) { nav.links a { padding: 8px 10px; font-size: 14px; } }
+  @media (max-width: 1024px) {
+    .hero .wrap, .split, .products-grid, .cta { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .grid-4, .steps { grid-template-columns: repeat(2, 1fr); }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .hero-card { max-width: 640px; margin: 0 auto 30px; }
   }
-  a:hover { background: #7c9cff; color: #0f1116; }
+  @media (max-width: 960px) {
+    nav.links, .nav-cta .btn-ghost { display: none; }
+    .menu-btn { display: block; }
+    nav.links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: #fff; padding: 12px 16px 20px; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
+    nav.links.open a { padding: 12px 14px; }
+    .strip-grid { grid-template-columns: repeat(2, 1fr); }
+    .strip-grid > div:nth-child(2) { border-right: 0; }
+    .strip-grid > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 760px) { .tb-emails { display: none; } .topbar .wrap { justify-content: center; } }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    section { padding: 72px 0; }
+    .hero { padding: 48px 0 90px; }
+    .grid-3, .grid-4, .steps, .foot { grid-template-columns: 1fr; }
+    .product-feature, .cta { padding: 28px; }
+    .product-feature h3 { font-size: 28px; }
+    .hero-tag { left: 8px; }
+    .nav-cta .btn-primary { padding: 10px 14px; font-size: 14px; }
+    .strip-grid > div { padding: 20px 16px; }
+    .strip-grid b { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-call" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l15-9z"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L22 14l-8 8-2.3-2.3a4 4 0 0 0-5-5L2 10l8-8z"/></symbol>
+  </defs>
+</svg>
+
+<div class="topbar">
   <div class="wrap">
-    <h1>Innobs Technology</h1>
-    <p>We build Scholae, a school management app for staff, teachers, students, and parents.</p>
-    <a href="/privacy-policy/">Privacy Policy</a>
+    <span class="tb-group"><svg><use href="#i-call"/></svg><a href="tel:+919500452761">+91 95004 52761</a><a href="tel:+919655107243">+91 96551 07243</a></span>
+    <span class="tb-group tb-emails"><svg><use href="#i-mail"/></svg><a href="mailto:babucse1992@gmail.com">babucse1992@gmail.com</a><a href="mailto:barathprakash3@gmail.com">barathprakash3@gmail.com</a></span>
   </div>
+</div>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Innobs Technology home">
+      <span class="logo-mark">i</span>
+      <span>Innobs<small>TECHNOLOGY</small></span>
+    </a>
+    <nav class="links" id="navlinks" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#process">How we work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://scholae.innobs.com">Visit Scholae</a>
+      <a class="btn btn-primary" href="#contact">Contact us</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <a class="pill" href="https://scholae.innobs.com"><b>New</b> Scholae, our school management platform</a>
+        <h1>Software that does the <span class="grad">day-to-day work</span> for you</h1>
+        <p class="lead">Innobs Technology designs and builds web and mobile software. We make our own products, like Scholae for schools, and we build custom apps for teams that need something that fits.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#products">See our products <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#contact">Talk to us</a>
+        </div>
+      </div>
+      <a class="hero-card reveal" href="https://scholae.innobs.com" aria-label="Open Scholae">
+        <img class="shot" src="assets/scholae-dashboard.jpg" alt="Scholae web dashboard" width="1200" height="812" />
+        <span class="hero-tag"><span>S</span><div><b>Scholae</b><small>scholae.innobs.com</small></div></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Strip -->
+  <section class="strip">
+    <div class="wrap">
+      <div class="strip-grid reveal">
+        <div><b>Own products</b><span>designed and run in-house</span></div>
+        <div><b>Web + Android</b><span>one team for both</span></div>
+        <div><b>Schools & business</b><span>who we build for</span></div>
+        <div><b>After launch</b><span>we keep supporting it</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">About Innobs</span>
+        <h2>A small team that builds software people actually use</h2>
+        <p class="sub">We started Innobs to make software that removes repetitive work from daily operations. We build the whole thing ourselves, from design to the app on your phone, and we stay around after it goes live.</p>
+      </div>
+      <div class="grid-3" style="grid-template-columns:1fr">
+        <div class="card reveal"><span class="icon"><svg><use href="#i-check"/></svg></span><h3>Built for real use</h3><p>We design with the people who will use the software every day, so the screens are simple and the flows match how work actually happens.</p></div>
+        <div class="card reveal"><span class="icon t"><svg><use href="#i-code"/></svg></span><h3>One team, end to end</h3><p>Web, mobile and backend are built by the same people, so nothing gets lost between teams.</p></div>
+        <div class="card reveal"><span class="icon w"><svg><use href="#i-shield"/></svg></span><h3>Support after launch</h3><p>Updates, monitoring and fixes continue after go-live, so your software keeps working as your needs change.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="soft">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Our products</span>
+        <h2>Products with a home of their own</h2>
+        <p>Each Innobs product lives on its own subdomain, with its own site, sign-in and apps. Our first is Scholae.</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-feature reveal" id="scholae">
+          <span class="badge">FLAGSHIP · LIVE</span>
+          <h3>Scholae<small>School management on web and Android</small></h3>
+          <p>One system for the school day: attendance, exams, homework, fees, transport, leaves and announcements. Admins use the web dashboard; teachers, parents, students and drivers use the Android app.</p>
+          <div class="chips"><span>Attendance</span><span>Exams</span><span>Homework</span><span>Fees</span><span>Transport</span><span>Notifications</span></div>
+          <img class="shot" src="assets/scholae-dashboard.jpg" alt="Scholae dashboard" width="1200" height="812" loading="lazy" />
+          <div class="ctas">
+            <a class="btn btn-light" href="https://scholae.innobs.com">Visit scholae.innobs.com <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-outline-light" href="https://scholae.innobs.com/#contact-us">Book a demo</a>
+          </div>
+        </article>
+
+        <div class="product-side">
+          <a class="card reveal" href="https://scholae.innobs.com/#dashboard">
+            <span class="icon s"><svg><use href="#i-globe"/></svg></span>
+            <h3>Scholae web dashboard</h3>
+            <p>See what admins and deans get, and sign in to the dashboard.</p>
+            <span class="more">Open dashboard <svg><use href="#i-arrow"/></svg></span>
+          </a>
+          <a class="card reveal" href="https://scholae.innobs.com/#get-app">
+            <span class="icon t"><svg><use href="#i-phone"/></svg></span>
+            <h3>Scholae Android app</h3>
+            <p>For teachers, parents, students and drivers. Install it from Google Play.</p>
+            <span class="more">Get the app <svg><use href="#i-arrow"/></svg></span>
+          </a>
+          <div class="card dashed reveal">
+            <span class="icon w"><svg><use href="#i-tool"/></svg></span>
+            <h3>More on the way</h3>
+            <p>New products are in development. Each one will launch on its own innobs.com subdomain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow">Services</span>
+        <h2>Need something built? We can do that too</h2>
+        <p>The same team that builds Scholae can build for you.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card reveal"><span class="icon"><svg><use href="#i-code"/></svg></span><h3>Web applications</h3><p>Dashboards, portals and internal tools built around how your team works.</p></div>
+        <div class="card reveal"><span class="icon t"><svg><use href="#i-phone"/></svg></span><h3>Mobile apps</h3><p>Android and iOS apps from one codebase, with offline support where you need it.</p></div>
+        <div class="card reveal"><span class="icon w"><svg><use href="#i-cloud"/></svg></span><h3>Backend & cloud</h3><p>APIs, databases and hosting set up to be reliable and easy to grow.</p></div>
+        <div class="card reveal"><span class="icon p"><svg><use href="#i-shield"/></svg></span><h3>Support & upkeep</h3><p>Updates, monitoring and fixes after launch, so your software keeps working.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="soft">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow">How we work</span>
+        <h2>From idea to something people use</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3>Discuss</h3><p>We learn how your team works today and what should change.</p></div>
+        <div class="step reveal"><h3>Design</h3><p>Simple screens and flows you can review before we build.</p></div>
+        <div class="step reveal"><h3>Build</h3><p>We build in small steps and show progress along the way.</p></div>
+        <div class="step reveal"><h3>Support</h3><p>We launch with you, train your people and keep it running.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div>
+          <h2>Let's talk about what you need</h2>
+          <p>Whether you want to see Scholae in your school or have an idea for something new, send us a note or give us a call and we will get back to you.</p>
+          <div class="ctas">
+            <a class="btn btn-light" href="mailto:babucse1992@gmail.com,barathprakash3@gmail.com">Email us <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-outline-light" href="https://scholae.innobs.com/#contact-us">Book a Scholae demo</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="row"><span class="ic"><svg><use href="#i-call"/></svg></span><span><small>Call us</small><b><a href="tel:+919500452761">+91 95004 52761</a></b><b><a href="tel:+919655107243">+91 96551 07243</a></b></span></div>
+          <div class="row"><span class="ic"><svg><use href="#i-mail"/></svg></span><span><small>Email</small><b><a href="mailto:babucse1992@gmail.com">babucse1992@gmail.com</a></b><b><a href="mailto:barathprakash3@gmail.com">barathprakash3@gmail.com</a></b></span></div>
+          <div class="row"><span class="ic"><svg><use href="#i-pin"/></svg></span><span><small>Based in</small><b>Chennai, Tamil Nadu</b></span></div>
+          <div class="row"><span class="ic"><svg><use href="#i-globe"/></svg></span><span><small>Scholae</small><b><a href="https://scholae.innobs.com">scholae.innobs.com</a></b></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark">i</span><span>Innobs<small>TECHNOLOGY</small></span></a>
+        <p>We build software products and custom apps for schools and businesses.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="https://scholae.innobs.com">Scholae</a></li>
+          <li><a href="https://scholae.innobs.com/#dashboard">Web dashboard</a></li>
+          <li><a href="https://scholae.innobs.com/#get-app">Android app</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+919500452761">+91 95004 52761</a></li>
+          <li><a href="tel:+919655107243">+91 96551 07243</a></li>
+          <li><a href="mailto:babucse1992@gmail.com">babucse1992@gmail.com</a></li>
+          <li><a href="mailto:barathprakash3@gmail.com">barathprakash3@gmail.com</a></li>
+          <li>Chennai, Tamil Nadu</li>
+          <li><a href="https://twitter.com/Innobs_tech" target="_blank" rel="noopener">Twitter</a></li>
+          <li><a href="https://in.linkedin.com/in/innobs-tech-946344226?trk=public_profile_browsemap" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Innobs Technology. All rights reserved.</span>
+      <a href="/privacy-policy/">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.querySelector('header.nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const links = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 }) : null;
+  document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
